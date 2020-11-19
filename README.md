@@ -35,7 +35,7 @@ You may display the line plot based on various features, generations or combinat
 ### Crawling
 >  **python main.py**
 >
-> This program will crawl through all the blogs on Nogizaka official blog website and save all the contexts, images and features by default.
+> This program will crawl through all the blogs on Nogizaka official blog website and save all the contexts, images and features by default. If you **don't have a mysql database**, you may comment out line 25 and line 35 containing **datamanager.addDataFrametoDataBase** function.
 
 #### args
 1. --mode, -m: "init" or "update". If "update" is chosen it will stop crawling after finding the data have already been saved based on date. (Won't update Number of Comments in csv, json and database) Default:"init"
