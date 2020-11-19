@@ -1,7 +1,7 @@
 # NogizakaBlog
 > This project provides an interactive visualization plot of based on Dash and the data were collected from http://blog.nogizaka46.com/
 > 
-> Further applications still in progress. 
+> Further applications are still in progress. 
 
 ## Package Version
 
