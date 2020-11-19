@@ -7,10 +7,10 @@ Created on Thu Nov 12 18:25:09 2020
 from BlogProcesser import BlogProcesser
 from DataManager import DataManager
 
+import argparse
 
-def main():
+def main(mode):
     #init or update
-    mode = "update"
     
     
     blogporcesser = BlogProcesser()
@@ -39,4 +39,8 @@ def main():
         
 
 if __name__ == '__main__':
-    main()
+    #Create Parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--mode','-m', help="update or init", type=str, default="update")
+    args = parser.parse_args()
+    main(args.mode)

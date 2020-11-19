@@ -11,14 +11,28 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
 
+import argparse
 
 from DataManager import DataManager
 
 
-#Load Data from MYSQL database
-datamanager = DataManager()
-df = datamanager.loadDataBasetoDataFrame()
+#Create Parser
+parser = argparse.ArgumentParser()
+parser.add_argument('--loadfrom','-l', help="Load from json, csv or db", type=str, default="csv")
+parser.add_argument('--port', '-p', help="which port you want this server run on", type=int, default=8900)
+args = parser.parse_args()
 
+#Load Data based on argument
+datamanager = DataManager()
+
+if args.loadfrom == 'db':
+    df = datamanager.loadDataBasetoDataFrame()
+
+elif args.loadfrom == 'json':
+    df = datamanager.loadJSONtoDataFrame()
+    
+else:
+    df = datamanager.loadCSVtoDataFrame()
 
 #Basic Settings    
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -115,4 +129,4 @@ def updateFigure(slct_mem, feature):
     return fig
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8900)
+    app.run_server(debug=True, port=args.port)
