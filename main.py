@@ -41,6 +41,6 @@ def main(mode):
 if __name__ == '__main__':
     #Create Parser
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode','-m', help="update or init", type=str, default="update")
+    parser.add_argument('--mode','-m', help="update or init", type=str, default="init")
     args = parser.parse_args()
     main(args.mode)
