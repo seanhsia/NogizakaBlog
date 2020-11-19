@@ -1,5 +1,6 @@
 __pycache__/*
 blogs/*
+!blogs/README.md
 .spyproject/*
 .spyproject/
 __pycache__
