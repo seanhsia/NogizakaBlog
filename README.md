@@ -20,7 +20,7 @@
 ## Execution Process
 
 ### Visualization
-> **python Visualize_server.py **
+> **python Visualize_server.py**
 > 
 > The application will run on 8900 port by default. Interactive interface can be use after connecting to 127.0.0.1:8900.  You should see similar image on your browser. (It is vital to keep the program running while using the application)
 ![newplot (6)](https://user-images.githubusercontent.com/32337423/99667483-75408600-2aa7-11eb-8003-96342162cdfb.png)
