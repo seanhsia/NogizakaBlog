@@ -4,3 +4,4 @@ blogs/*
 .spyproject/*
 .spyproject/
 __pycache__
+ngrok.exe
