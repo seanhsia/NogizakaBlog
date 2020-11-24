@@ -63,30 +63,11 @@ class DataManager():
              'yuna.shibata': 4,
              'yuri.kitagawa': 4,
              'yuuki.yoda': 3}
+    
+class DataFrameManager(DataManager):    
     def toDataFrame(self, data_list):
         return pd.DataFrame(data_list).drop_duplicates()
-    
-    def toCSV(self, data_list):
-        print("writing CSV...")
-        df = self.toDataFrame(data_list)
-        df.to_csv(self.path+'blogdata.csv', index=False, encoding='utf_8_sig')
         
-    def toJSON(self, data_list):
-        print("writing JSON...")
-        with open(self.path+'blogdata.json', 'w', encoding='utf-8') as file:
-            json_obj = json.dumps(data_list)
-            file.write(json_obj)
-            
-    def loadCSVtoDataFrame(self):
-        print("Loading from CSV file...")
-        return pd.read_csv(self.path+'blogdata.csv', encoding='utf_8_sig')
-    
-    def loadJSONtoDataFrame(self):
-        print("Loading from JSON file...")
-        with open(self.path+'blogdata.json', 'r', encoding='utf-8') as file:
-            feat_list = json.load(file)
-        return self.toDataFrame(feat_list)
-    
     def appendRowstoDataFrame(self, src_df, new_df):
         return src_df.append(new_df, ignore_index=True).drop_duplicates()
     
@@ -97,8 +78,34 @@ class DataManager():
         generation_arr = np.array(list(map(lambda x: self.generation_map[x], df["Author"])))
         df["Generation"] = generation_arr
         return df
-        
+
+
+class JsonManager(DataManager):
+    def loadJSONtoDataFrame(self):
+        print("Loading from JSON file...")
+        with open(self.path+'blogdata.json', 'r', encoding='utf-8') as file:
+            feat_list = json.load(file)
+        return self.toDataFrame(feat_list)
     
+    def toJSON(self, data_list):
+        print("writing JSON...")
+        with open(self.path+'blogdata.json', 'w', encoding='utf-8') as file:
+            json_obj = json.dumps(data_list)
+            file.write(json_obj)
+
+class CSVManager(DataManager):
+    def toCSV(self, data_list):
+        print("writing CSV...")
+        df = pd.DataFrame(data_list).drop_duplicates()
+        df.to_csv(self.path+'blogdata.csv', index=False, encoding='utf_8_sig')
+        
+    def loadCSVtoDataFrame(self):
+        print("Loading from CSV file...")
+        return pd.read_csv(self.path+'blogdata.csv', encoding='utf_8_sig')
+    
+
+
+class DataBaseManager():    
     def createDBEngine(self, db_name='nogizaka'):
         try:
             #Create connection to Mysql database

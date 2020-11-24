@@ -5,3 +5,5 @@ blogs/*
 .spyproject/
 __pycache__
 ngrok.exe
+LineBot.py
+config.ini

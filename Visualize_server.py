@@ -13,7 +13,7 @@ import pandas as pd
 
 import argparse
 
-from DataManager import DataManager
+from DataManager import DataFrameManager, CSVManager, DataBaseManager, JsonManager
 
 
 #Create Parser
@@ -23,16 +23,18 @@ parser.add_argument('--port', '-p', help="which port you want this server run on
 args = parser.parse_args()
 
 #Load Data based on argument
-datamanager = DataManager()
+csv_manager = CSVManager()
+db_manager = DataBaseManager()
+json_manager = JsonManager()
 
 if args.loadfrom == 'db':
-    df = datamanager.loadDataBasetoDataFrame()
+    df = db_manager.loadDataBasetoDataFrame()
 
 elif args.loadfrom == 'json':
-    df = datamanager.loadJSONtoDataFrame()
+    df = json_manager.loadJSONtoDataFrame()
     
 else:
-    df = datamanager.loadCSVtoDataFrame()
+    df = csv_manager.loadCSVtoDataFrame()
 
 #Basic Settings    
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']

@@ -5,7 +5,7 @@ Created on Thu Nov 12 18:25:09 2020
 @author: Sean Hsia
 """
 from BlogProcesser import BlogProcesser
-from DataManager import DataManager
+from DataManager import DataFrameManager, CSVManager, DataBaseManager, JsonManager
 
 import argparse
 
@@ -14,27 +14,30 @@ def main(mode):
     
     
     blogporcesser = BlogProcesser()
-    datamanager = DataManager()
+    df_manager = DataFrameManager()
+    csv_manager = CSVManager()
+    db_manager = DataBaseManager()
+    json_manager = JsonManager()
     
     if mode == "update":
         blogporcesser.updateSavedBlogData()
-        src_df = datamanager.loadCSVtoDataFrame()
-        src_df = datamanager.addGenerationFeatures(src_df)
-        new_df = datamanager.toDataFrame(blogporcesser.feature_list)
-        new_df = datamanager.addGenerationFeatures(new_df)
-        datamanager.addDataFrametoDataBase(new_df)
-        df = datamanager.appendRowstoDataFrame(src_df, new_df)
+        src_df = csv_manager.loadCSVtoDataFrame()
+        src_df = df_manager.addGenerationFeatures(src_df)
+        new_df = df_manager.toDataFrame(blogporcesser.feature_list)
+        new_df = df_manager.addGenerationFeatures(new_df)
+        db_manager.addDataFrametoDataBase(new_df)
+        df = df_manager.appendRowstoDataFrame(src_df, new_df)
         
-        datamanager.toCSV( df.to_dict('records'))
-        datamanager.toJSON(  df.to_dict('records'))
+        csv_manager.toCSV( df.to_dict('records'))
+        json_manager.toJSON(  df.to_dict('records'))
     
     elif mode == "init":
         blogporcesser.crawling()
-        df = datamanager.addGenerationFeatures(
-                datamanager.toDataFrame(blogporcesser.feature_list))
-        datamanager.addDataFrametoDataBase(df, mode="replace")        
-        datamanager.toCSV(df.to_dict('records'))
-        datamanager.toJSON(df.to_dict('records'))
+        df = df_manager.addGenerationFeatures(
+                df_manager.toDataFrame(blogporcesser.feature_list))
+        db_manager.addDataFrametoDataBase(df, mode="replace")        
+        csv_manager.toCSV(df.to_dict('records'))
+        json_manager.toJSON(df.to_dict('records'))
         
         
 
