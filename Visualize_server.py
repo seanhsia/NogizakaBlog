@@ -9,11 +9,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
-import pandas as pd
 
 import argparse
 
-from DataManager import DataFrameManager, CSVManager, DataBaseManager, JsonManager
+from DataManager import CSVManager, DataBaseManager, JsonManager
 
 
 #Create Parser
@@ -111,10 +110,12 @@ def updateFigure(slct_mem, feature):
         dfc = dfc[dfc["Generation"]==slct_mem].reset_index(drop=True)
     
     elif type(slct_mem) is None :
-        return None
-        
+         return None
+       
     dfc['Date']=dfc['Date'].str.replace('/','-')    
     dfc = dfc.loc[:, ["Author", "Title", "Date", feature]]
+    dfc = dfc.sort_values("Date", ignore_index=True, ascending=True)
+    
     
     fig = px.line(
             data_frame=dfc,

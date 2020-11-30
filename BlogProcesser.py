@@ -8,9 +8,11 @@ import os
 from sys import exit
 import re
 
+import json
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+
 
 
 
@@ -223,7 +225,8 @@ class BlogProcesser():
                    "Number of Comments": comments_num,
                    "Number of Characters in Title": len(title),
                    "Number of Characters in Context": char_num,
-                   "Number of Images": img_num}
+                   "Number of Images": img_num,
+                   "Urls of Images": json.dumps(img_urls)}
         
         
         

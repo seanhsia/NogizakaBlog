@@ -133,6 +133,34 @@ class DataBaseManager():
     def loadDataBasetoDataFrame(self):
         engine = self.createDBEngine()
         return pd.read_sql("blogs", engine)
+    
+    
+class LineBotDataManager(DataBaseManager):
+    def getPaths(self, authors='all', date='newest'):
+        engine = self.createDBEngine()
+        if authors == 'all':
+            if date == 'newest':
+                query = 'SELECT `Context Path`, `Urls of Images` From blogs\
+                            ORDER BY Date desc\
+                            LIMIT 1'
+        if authors == 'random' and date == 'random':
+            query = 'SELECT `Context Path`, `Urls of Images` From blogs\
+                        ORDER BY RAND()\
+                        LIMIT 1'                            
+        df = pd.read_sql(query, engine)
+        
+        return list(df['Context Path']), list(df['Urls of Images'])
+    
+    def getPathsContexts(self, paths):
+        contexts=[]
+        for path in paths:
+            with open(path, encoding='utf-8') as file:
+                context = file.read()
+                context = context.replace('\n\n', '\n')
+            contexts.append(context)
+        contexts.reverse()
+        return contexts
+    
         
         
 
