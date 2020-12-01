@@ -39,6 +39,7 @@ You may display the line plot based on various features, generations or combinat
 
 #### args
 1. --mode, -m: "init" or "update". If "update" is chosen it will stop crawling after finding the data have already been saved based on date. (Won't update Number of Comments in csv, json and database) Default:"init"
+2. --all, -a: use this parameter if you want to update all blogs' Number of Comments and other features. If your database, csv or json have graduated members, you should always add this parameter. 
 
 #### features
 - Author
