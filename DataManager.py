@@ -62,7 +62,12 @@ class DataManager():
              'third': 3,
              'yuna.shibata': 4,
              'yuri.kitagawa': 4,
-             'yuuki.yoda': 3}
+             'yuuki.yoda': 3,
+             'runa.hayashi': 4,
+             'haruka.kuromi': 4,
+             'rika.satou': 4,
+             'miyu.matsuo': 4,
+             'nao.yumiki':4}
     
 class DataFrameManager(DataManager):    
     def toDataFrame(self, data_list):
