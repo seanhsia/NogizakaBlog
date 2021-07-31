@@ -100,7 +100,7 @@ class BlogProcesser():
             header like browser
 
         '''
-        ua = UserAgent(use_cache_server=False)        
+        ua = UserAgent(use_cache_server=True)        
         header = {'User-Agent':str(ua.random)}
         return header
 

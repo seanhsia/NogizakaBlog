@@ -85,7 +85,7 @@ class DataFrameManager(DataManager):
         return df
 
 
-class JsonManager(DataManager):
+class JsonManager(DataFrameManager):
     def loadJSONtoDataFrame(self):
         print("Loading from JSON file...")
         with open(self.path+'blogdata.json', 'r', encoding='utf-8') as file:

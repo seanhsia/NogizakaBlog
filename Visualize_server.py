@@ -111,6 +111,7 @@ def updateFigure(slct_mem, feature):
     
     elif type(slct_mem) is None :
          return None
+    print(slct_mem)
        
     dfc['Date']=dfc['Date'].str.replace('/','-')    
     dfc = dfc.loc[:, ["Author", "Title", "Date", feature]]
