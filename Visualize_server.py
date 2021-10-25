@@ -108,9 +108,7 @@ def updateFigure(slct_mem, feature):
         dfc = dfc[dfc["Author"].isin(slct_mem)].reset_index(drop=True)
     elif type(slct_mem) is int:
         dfc = dfc[dfc["Generation"]==slct_mem].reset_index(drop=True)
-    
-    elif type(slct_mem) is None :
-         return None
+
     print(slct_mem)
        
     dfc['Date']=dfc['Date'].str.replace('/','-')    
