@@ -52,14 +52,16 @@ app.layout = html.Div([
             id='customization_dropdown',
             options=[{'label': 'Yes', 'value':'Yes'},
                      {'label': 'No', 'value':'No'}],
-            placeholder="Select member or not"
+            placeholder="Select member or not",
+            value = 'No'
         ),
     ], style={'width': '20%', 'display': 'inline-block'}),
     
     html.Div([
         dcc.Dropdown(
             id='members',
-            options=[]
+            options=[],
+            value = 1
         ),
     ], style={'width': '20%', 'display': 'inline-block'}),
     
@@ -109,8 +111,6 @@ def updateFigure(slct_mem, feature):
     elif type(slct_mem) is int:
         dfc = dfc[dfc["Generation"]==slct_mem].reset_index(drop=True)
 
-    print(slct_mem)
-       
     dfc['Date']=dfc['Date'].str.replace('/','-')    
     dfc = dfc.loc[:, ["Author", "Title", "Date", feature]]
     dfc = dfc.sort_values("Date", ignore_index=True, ascending=True)
